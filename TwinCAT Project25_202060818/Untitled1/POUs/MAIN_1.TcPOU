@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN_1" Id="{f8184a12-3342-4fd4-85e2-81885565f616}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN_1
+VAR
+	ASI_Axis : Tc3_DriveMotionControl.AXIS_REF;	
+	
+	fbPower		: Tc3_DriveMotionControl.MC_Power;
+	bEnable		: BOOL;
+	bAxisReady	: BOOL;
+	bPowerErr	: BOOL;
+	nPowerErrId	: UDINT;
+	
+	fbMoveVelo		: Tc3_DriveMotionControl.MC_MoveVelocity;
+	bExeVelo		: BOOL;
+	fSetVelo		: LREAL := 500;	
+	bMoveVeloErr	: BOOL;
+	nMoveVeloErrId	: UDINT;
+	fAccel			: LREAL := 1000;
+	fDecel			: LREAL := 1000;
+	bContUpdate		: BOOL := TRUE;
+	
+	fbStop		: Tc3_DriveMotionControl.MC_Stop;
+	bStop		: BOOL;
+	bStopDone	: BOOL;
+	bStopErr	: BOOL;
+	nStopErrId	: UDINT;
+	
+	fbReset		: Tc3_DriveMotionControl.MC_Reset;
+	bReset		: BOOL;
+	bResetErr	: BOOL;
+	nResetErr	: UDINT;
+	
+	bLamp	: BOOL;
+	bButton	: BOOL;
+	
+	fbMoveAbs		: Tc3_DriveMotionControl.MC_MoveAbsolute;
+	bExeMoveAbs		: BOOL;
+	fAbsPos			: LREAL := 0;
+	fAbsMoveVelo	: LREAL := 50;
+	bMoveAbsErr		: BOOL;
+	nMoveAbsErrId	: UDINT;
+	bfbMoveAbsDone	: BOOL;
+	bMoveAbsBusy	: BOOL;
+	
+	fbHome			: Tc3_DriveMotionControl.MC_Home;
+	bHome			: BOOL;
+	bHomeDone		: BOOL;
+	bHomeBusy		: BOOL;
+	bHomeErr		: BOOL;
+	nHomeErrId		: UDINT;
+	
+	fbSetPosition	: Tc3_DriveMotionControl.MC_SetPosition;
+	bSetPos			: BOOL;
+	fSetPostion		: LREAL := 1;
+	bSetPosErr		: BOOL;
+	nSetPosErrId	: UDINT;
+	bSetPosDone		: BOOL;
+	bSetPosBusy		: BOOL;
+	
+	fbMoveModulo	: Tc3_DriveMotionControl.MC_MoveModulo;
+	bExeMoveMod		: BOOL;
+	fModPosition	: LREAL;
+	fModVelo		: LREAL := 100;
+	bMoveModDone	: BOOL;
+	bMoveModBusy	: BOOL;
+	bMoveModErr		: BOOL;
+	nMoveModeerrId	: UDINT;
+	
+
+	fbJog			:Tc3_DriveMotionControl.MC_Jog;
+	bJogFwd			: BOOL;
+	bJogBack		: BOOL;
+	bJogErr			: BOOL;
+	nJogErrId		: UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bLamp := bButton;
+
+ASI_Axis.ReadStatus();
+
+Asi_Axis.Status.SetVelo;
+Asi_Axis.Status.ActVelo;
+
+Asi_Axis.Status.SetPos;
+Asi_Axis.Status.ActPos;
+
+
+fbPower(
+	Axis:= ASI_Axis, 
+	Enable:= bEnable, 
+	Status=> bAxisReady, 
+	Busy=> , 
+	Active=> , 
+	Error=> bPowerErr, 
+	ErrorID=> nPowerErrId);
+	
+fbMoveVelo(
+	Axis:= ASI_Axis, 
+	Execute:= bExeVelo, 
+	ContinuousUpdate:= bContUpdate, 
+	Velocity:= fSetVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Direction:= , 
+	Options:= , 
+	InVelocity=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveVeloErr, 
+	ErrorID=> nMoveVeloErrId);
+
+fbMoveAbs(
+	Axis:= ASI_Axis, 
+	Execute:= bExeMoveAbs, 
+	Position:= fAbsPos, 
+	Velocity:= fAbsMoveVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fAccel, 
+	Options:= , 
+	Done=> bfbMoveAbsDone, 
+	Busy=> bMoveAbsBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveAbsErr, 
+	ErrorID=> nMoveAbsErrId);
+
+fbHome(
+	Axis:= ASI_Axis, 
+	Execute:= bHome, 
+	Position:= 0, 
+	HomingMode:= Tc3_DriveMotionControl.MC_HomingMode.MC_DefaultHoming, 
+	Options:= , 
+	Done=> bHomeDone, 
+	Busy=> bHomeBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bHomeErr, 
+	ErrorID=> nHomeErrId);
+
+fbSetPosition(
+	Axis:= ASI_Axis, 
+	Execute:= bSetPos, 
+	Position:= fSetPostion, 
+	Mode:= , 
+	Options:= , 
+	Done=> bSetPosDone, 
+	Busy=> bSetPosBusy, 
+	Error=> bSetPosErr, 
+	ErrorID=>nSetPosErrId );
+	
+fbMoveModulo(
+	Axis:= ASI_Axis, 
+	Execute:= bExeMoveMod, 
+	Position:= fModPosition, 
+	Velocity:= fModVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Direction:= MC_Direction.MC_Positive_Direction, 
+	Options:= , 
+	Done=> bMoveModDone, 
+	Busy=> bMoveModBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveModErr, 
+	ErrorID=> nMoveModeerrId);
+
+fbJog(
+	Axis:= ASI_Axis, 
+	JogForward:= bJogFwd, 
+	JogBackwards:= bJogBack, 
+	Velocity:= fSetVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bJogErr, 
+	ErrorID=> nJogErrId);
+
+	
+fbStop(
+	Axis:= ASI_Axis, 
+	Execute:= bStop, 
+	Deceleration:= fDecel, 
+	Options:= , 
+	Done=> bStopDone, 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bStopErr, 
+	ErrorID=>nStopErrId );
+	
+fbReset(
+	Axis:= ASI_Axis, 
+	Execute:= bReset, 
+	Done=> , 
+	Busy=> , 
+	Error=> bResetErr, 
+	ErrorID=> nResetErr);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

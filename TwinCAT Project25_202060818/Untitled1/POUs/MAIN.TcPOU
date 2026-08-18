@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{273b7da1-9264-469b-88dd-cbcc1f114e1c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR CONSTANT
+	nNumMotor : USINT := 6;
+END_VAR
+VAR
+	ASI_Axis : ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.AXIS_REF;	
+	
+	fbPower		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Power;
+	bEnable		: ARRAY [1..nNumMotor] OF BOOL;
+	bAxisReady	: ARRAY [1..nNumMotor] OF BOOL;
+	bPowerErr	: BOOL;
+	nPowerErrId	: UDINT;
+	
+	fbMoveVelo		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_MoveVelocity;
+	bExeVelo		: ARRAY [1..nNumMotor] OF BOOL;
+	fSetVelo		: LREAL := 500;	
+	bMoveVeloErr	: BOOL;
+	nMoveVeloErrId	: UDINT;
+	fAccel			: LREAL := 1000;
+	fDecel			: LREAL := 1000;
+	bContUpdate		: BOOL := TRUE;
+	
+	fbStop		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Stop;
+	bStop		: ARRAY [1..nNumMotor] OF BOOL;
+	bStopDone	: BOOL;
+	bStopErr	: BOOL;
+	nStopErrId	: UDINT;
+	
+	fbReset		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Reset;
+	bReset		: ARRAY [1..nNumMotor] OF BOOL;
+	bResetErr	: BOOL;
+	nResetErr	: UDINT;
+	
+	bLamp	: BOOL;
+	bButton	: BOOL;
+	
+	fbMoveAbs		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_MoveAbsolute;
+	bExeMoveAbs		: ARRAY [1..nNumMotor] OF BOOL;
+	fAbsPos			: LREAL := 0;
+	fAbsMoveVelo	: LREAL := 50;
+	bMoveAbsErr		: BOOL;
+	nMoveAbsErrId	: UDINT;
+	bfbMoveAbsDone	: BOOL;
+	bMoveAbsBusy	: BOOL;
+	
+	fbHome			: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Home;
+	bHome			: ARRAY [1..nNumMotor] OF BOOL;
+	bHomeDone		: BOOL;
+	bHomeBusy		: BOOL;
+	bHomeErr		: BOOL;
+	nHomeErrId		: UDINT;
+	
+	fbSetPosition	: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_SetPosition;
+	bSetPos			: ARRAY [1..nNumMotor] OF BOOL;
+	fSetPostion		: LREAL := 1;
+	bSetPosErr		: BOOL;
+	nSetPosErrId	: UDINT;
+	bSetPosDone		: BOOL;
+	bSetPosBusy		: BOOL;
+	
+	fbMoveModulo	: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_MoveModulo;
+	bExeMoveMod		: ARRAY [1..nNumMotor] OF BOOL;
+	fModPosition	: LREAL;
+	fModVelo		: LREAL := 100;
+	bMoveModDone	: BOOL;
+	bMoveModBusy	: BOOL;
+	bMoveModErr		: BOOL;
+	nMoveModeerrId	: UDINT;
+	
+
+	fbJog			: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Jog;
+	bJogFwd			: ARRAY [1..nNumMotor] OF BOOL;
+	bJogBack		: ARRAY [1..nNumMotor] OF BOOL;
+	bJogErr			: BOOL;
+	nJogErrId		: UDINT;
+	i				: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bLamp := bButton;
+
+ASI_Axis[1].ReadStatus();
+Asi_Axis[1].Status.SetVelo;
+Asi_Axis[1].Status.ActVelo;
+Asi_Axis[1].Status.SetPos;
+Asi_Axis[1].Status.ActPos;
+
+
+ASI_Axis[2].ReadStatus();
+Asi_Axis[2].Status.SetVelo;
+Asi_Axis[2].Status.ActVelo;
+Asi_Axis[2].Status.SetPos;
+Asi_Axis[2].Status.ActPos;
+
+
+
+FOR i := 1 TO nNumMotor DO
+	
+
+fbPower[i](
+	Axis:= ASI_Axis[i], 
+	Enable:= bEnable[i], 
+	Status=> bAxisReady[i], 
+	Busy=> , 
+	Active=> , 
+	Error=> bPowerErr, 
+	ErrorID=> nPowerErrId);
+	
+fbMoveVelo[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bExeVelo[i], 
+	ContinuousUpdate:= bContUpdate, 
+	Velocity:= fSetVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Direction:= , 
+	Options:= , 
+	InVelocity=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveVeloErr, 
+	ErrorID=> nMoveVeloErrId);
+
+
+fbMoveAbs[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bExeMoveAbs[i], 
+	Position:= Asi_Axis[i].Status.ActPos + fAbsPos, 
+	Velocity:= fAbsMoveVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fAccel, 
+	Options:= , 
+	Done=> bfbMoveAbsDone, 
+	Busy=> bMoveAbsBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveAbsErr, 
+	ErrorID=> nMoveAbsErrId);
+
+fbHome[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bHome[i], 
+	Position:= 0, 
+	HomingMode:= Tc3_DriveMotionControl.MC_HomingMode.MC_DefaultHoming, 
+	Options:= , 
+	Done=> bHomeDone, 
+	Busy=> bHomeBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bHomeErr, 
+	ErrorID=> nHomeErrId);
+
+fbSetPosition[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bSetPos[i], 
+	Position:= fSetPostion, 
+	Mode:= , 
+	Options:= , 
+	Done=> bSetPosDone, 
+	Busy=> bSetPosBusy, 
+	Error=> bSetPosErr, 
+	ErrorID=>nSetPosErrId );
+	
+fbMoveModulo[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bExeMoveMod[i], 
+	Position:= fModPosition, 
+	Velocity:= fModVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Direction:= MC_Direction.MC_Positive_Direction, 
+	Options:= , 
+	Done=> bMoveModDone, 
+	Busy=> bMoveModBusy, 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bMoveModErr, 
+	ErrorID=> nMoveModeerrId);
+
+fbJog[i](
+	Axis:= ASI_Axis[i], 
+	JogForward:= bJogFwd[i], 
+	JogBackwards:= bJogBack[i], 
+	Velocity:= fSetVelo, 
+	Acceleration:= fAccel, 
+	Deceleration:= fDecel, 
+	Done=> , 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bJogErr, 
+	ErrorID=> nJogErrId);
+
+	
+fbStop[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bStop[i], 
+	Deceleration:= fDecel, 
+	Options:= , 
+	Done=> bStopDone, 
+	Busy=> , 
+	Active=> , 
+	CommandAborted=> , 
+	Error=> bStopErr, 
+	ErrorID=>nStopErrId );
+	
+fbReset[i](
+	Axis:= ASI_Axis[i], 
+	Execute:= bReset[i], 
+	Done=> , 
+	Busy=> , 
+	Error=> bResetErr, 
+	ErrorID=> nResetErr);
+	
+END_FOR	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
