@@ -77,10 +77,43 @@ VAR
 	bJogErr			: BOOL;
 	nJogErrId		: UDINT;
 	i				: INT;
+	bEnableAll: BOOL;
+	bResetAll: BOOL;
+	jogForwardButton: BOOL;
+	nAxis: INT;
+	jogBackwardButton: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[bLamp := bButton;
+
+IF bEnableAll THEN
+	FOR i := 1 TO nNumMotor DO
+		bReset[i] := FALSE;
+		bEnable[i] := TRUE;
+	END_FOR
+END_IF
+
+IF bResetAll THEN
+	FOR i := 1 TO nNumMotor DO
+		bEnable[i] := FALSE;
+		bReset[i] := TRUE;
+	END_FOR
+END_IF
+
+
+IF jogForwardButton THEN
+	MAIN.bJogFwd[nAxis] := TRUE;
+ELSE
+	MAIN.bJogFwd[nAxis] := FALSE;
+END_IF
+
+IF jogBackwardButton THEN
+	MAIN.bJogBack[nAxis] := TRUE;
+ELSE
+	MAIN.bJogBack[nAxis] := FALSE;
+END_IF
+
 
 ASI_Axis[1].ReadStatus();
 Asi_Axis[1].Status.SetVelo;

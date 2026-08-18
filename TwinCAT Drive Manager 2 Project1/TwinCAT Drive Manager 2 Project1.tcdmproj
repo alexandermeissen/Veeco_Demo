@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Name>Drive Manager 2</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f5828bae-01e9-4eb4-bd70-ee3611f05828}</ProjectGuid>
+    <TcPath>..\TwinCAT Project25_202060818\TwinCAT Project25.tsproj</TcPath>
+    <AssemblyName>TwinCAT Drive Manager 2 Project1</AssemblyName>
+    <RootNamespace>TwinCAT Drive Manager 2 Project1</RootNamespace>
+    <SaveDriveDataAsFiles>False</SaveDriveDataAsFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Box 4 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Box 4 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+    <Content Include="Box 5 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Box 5 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+    <Content Include="Box 6 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 5 (CU1128-B)^Box 6 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+    <Content Include="Box 7 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 5 (CU1128-B)^Box 7 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+    <Content Include="Box 8 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 6 (CU1128-C)^Box 8 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+    <Content Include="Box 9 %28ASI8100-0000-0010%29.tcdmdrv">
+      <SubType>Content</SubType>
+      <IoItemPathName>TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 6 (CU1128-C)^Box 9 (ASI8100-0000-0010)</IoItemPathName>
+    </Content>
+  </ItemGroup>
+</Project>
