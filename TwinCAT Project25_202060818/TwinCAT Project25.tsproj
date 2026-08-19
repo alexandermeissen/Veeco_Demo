@@ -2,6 +2,15 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.25">
 	<DataTypes>
 		<DataType>
+			<Name GUID="{91952434-3B1E-48FD-FCD9-909033EAF991}" IecBaseType="true" AutoDeleteType="true">ARRAY [1..6] OF BOOL</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+			<ArrayInfo>
+				<LBound>1</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{3A8BFF29-A39F-1212-8FD9-D3CF9EA71B2A}" Namespace="Tc3_DriveMotionControl" AutoDeleteType="true">ST_FeedbackStatusWord</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -882,7 +891,7 @@
 		<ImageData Id="1004">424de6000000000000007600000028000000100000000e000000010004000000000000000000120b0000120b00001000000010000000411f91ffff00ffff999999ffa3a3cfffd0d0d0ffdbdbdbff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff12222222222222111244355555555201333333555500000012553555555552011235555555555231333333555533333312355555555552311235555555555231333333555533333312355555555552311205555555555231000000555533333312055555555552311222222222222211</ImageData>
 		<ImageData Id="1005">424de6000000000000007600000028000000100000000e000000010004000000000000000000120b0000120b00001000000010000000411f91ffff00ffff999999ffa3a3cfffd0d0d0ffdbdbdbff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff000000ff12222222222222111244355555555231333333555533333312553555555552311235555555555201333333555500000012355555555552011235555555555201333333555500000012355555555552011235555555555201333333555500000012355555555552011222222222222211</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{E3DA4797-9274-4815-9B82-A73CC8C70478}" Target64Bit="true" ShowHideConfigurations="#x6">
+	<Project ProjectGUID="{E3DA4797-9274-4815-9B82-A73CC8C70478}" TargetNetId="5.164.44.105.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Settings MaxCpus="4">
 				<Cpu/>
@@ -893,14 +902,14 @@
 				<Task Id="5" Priority="20" CycleTime="100000" AmsPort="350" Affinity="#x00000001" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
-				<Task Id="2" Priority="30" CycleTime="1000000" AmsPort="351" Affinity="#x00000001" DisableFpExceptions="true" AdtTasks="true">
+				<Task Id="2" Priority="30" CycleTime="500000" AmsPort="351" Affinity="#x00000001" DisableFpExceptions="true" AdtTasks="true">
 					<Name>VISU_TASK</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{FC75DCED-3A88-453A-BF02-90391BF3174E}" Name="Untitled1" PrjFilePath="Untitled1\Untitled1.plcproj" TmcFilePath="Untitled1\Untitled1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{3C1BD5E3-6CF9-0545-3C37-BB8C3D2B65AA}" TmcPath="Untitled1\Untitled1.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E1E87AA7-A17B-CCF4-3AF8-DC8E69487B05}" TmcPath="Untitled1\Untitled1.tmc">
 					<Name>Untitled1 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -932,6 +941,10 @@
 					</Vars>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.wcState</Name>
+							<Type GUID="{91952434-3B1E-48FD-FCD9-909033EAF991}">ARRAY [1..6] OF BOOL</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.ASI_Axis[1].DriveToPlc</Name>
 							<Type GUID="{0DE18E34-570B-EA73-24A8-9A8FB8CA912C}" Namespace="Tc3_DriveMotionControl">DRIVETOPLC_AXIS_REF</Type>
@@ -1039,7 +1052,7 @@
 								<OTCID>#x02010020</OTCID>
 							</ManualConfig>
 							<Priority>30</Priority>
-							<CycleTime>100000000</CycleTime>
+							<CycleTime>50000000</CycleTime>
 						</Context>
 					</Contexts>
 					<JsonDynPous><![CDATA[null]]></JsonDynPous>
@@ -1052,7 +1065,7 @@
 			<PlcAuxTask Affinity="#x00000001"/>
 		</Plc>
 		<Io>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="10.12.64.14.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="5.164.44.105.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Ccat>
@@ -1105,7 +1118,7 @@
 								<OrderCode>ASI811x-xxxx-x1xx</OrderCode>
 								<Name>Box 4 (ASI8100-0000-0010)</Name>
 								<ProductRevision>ASI8100-0000-0010</ProductRevision>
-								<FirmwareVersion>00beta04_1344831d</FirmwareVersion>
+								<FirmwareVersion>00beta05_20edd02f</FirmwareVersion>
 								<BootloaderVersion>L1.1.61.0</BootloaderVersion>
 								<CatalogNo>ASI8111-1000-011</CatalogNo>
 								<HardwareVersion>00</HardwareVersion>
@@ -1161,80 +1174,89 @@
 										</TcLink>
 										<SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
 										<Block Id="0">
-											<Motor IsManualInput="false" IsManualMFiInput="false" DataSource="2" SerialNo="00000000">
+											<Motor IsManualInput="false" IsManualMFiInput="false">
 												<DatabaseType>
-													<OrderCode>ASI8111-1000-0110</OrderCode>
-													<ElectricMotorType>ASI8111x1x00xx1xx</ElectricMotorType>
-													<MotorfeedbackType>Scanned</MotorfeedbackType>
-													<VendorName>Beckhoff</VendorName>
+													<SchemaVersion>1.18</SchemaVersion>
+													<DataVersion>1.18.0</DataVersion>
+													<OrderCode>ASI8114-1000-0110</OrderCode>
+													<GroupType>ASI81xx</GroupType>
+													<ElectricMotorType>ASI8114-xx00-x1x0</ElectricMotorType>
+													<MotorfeedbackType>xxx</MotorfeedbackType>
+													<VendorName>BECKHOFF</VendorName>
 													<IsAc>false</IsAc>
 													<ConstructType>4</ConstructType>
 													<IsBeckhoffMotorShaftSpeicified>false</IsBeckhoffMotorShaftSpeicified>
 												</DatabaseType>
 												<DatabaseParameters>
 													<Parameter>
+														<Comment LcId="1033">Motorvendor</Comment>
 														<Name>Vendor</Name>
 														<Data type="visibleString">Beckhoff</Data>
 													</Parameter>
 													<Parameter>
-														<Name>OrderCode</Name>
-														<Data type="visibleString">ASI8111-1000-0110</Data>
-													</Parameter>
-													<Parameter>
+														<Comment LcId="1033">Electric motor type</Comment>
 														<Name>ElecType</Name>
-														<Data type="visibleString">ASI8111x1x00xx1xx</Data>
+														<Data type="visibleString">ASI8114-xx00-x1x0</Data>
 													</Parameter>
 													<Parameter>
-														<Name>SerialNr</Name>
-														<Data type="visibleString">00000000</Data>
-													</Parameter>
-													<Parameter>
+														<Comment LcId="1033">Motor construction</Comment>
 														<Name>ConstrType</Name>
 														<Data type="real64">4</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Rated Current</Comment>
 														<Name>Inrms</Name>
 														<Data type="real64" unitSiNumerator="4">1</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Nominal Voltage</Comment>
 														<Name>Unrms</Name>
 														<Data type="real64" unitSiNumerator="38">48</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Max Voltage</Comment>
 														<Name>Umaxrms</Name>
 														<Data type="real64" unitSiNumerator="38">60</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Standstill torque</Comment>
 														<Name>M0</Name>
-														<Data type="real64" unitSiNumerator="86">0.29</Data>
+														<Data type="real64" unitSiNumerator="86">0.8</Data>
 													</Parameter>
 													<Parameter>
-														<Name>SteppsPerRot</Name>
-														<Data type="real64">200</Data>
+														<Comment LcId="1033">Pull out /break down torque</Comment>
+														<Name>Mpullout</Name>
+														<Data type="real64" unitSiNumerator="86">1</Data>
 													</Parameter>
 													<Parameter>
-														<Name>kT</Name>
-														<Data type="real64" unitSiNumerator="86" unitSiDenominator="4">0.3</Data>
+														<Comment LcId="1033">EMK</Comment>
+														<Name>kErms</Name>
+														<Data type="real64" unitSiNumerator="38" unitSiDenominator="225">0.053</Data>
 													</Parameter>
 													<Parameter>
-														<Name>J</Name>
-														<Data type="real64" unitSiNumerator="224">3.1E-06</Data>
+														<Comment LcId="1033">Winding resistance Ph-Ph 20°C</Comment>
+														<Name>R</Name>
+														<Data type="real64" unitSiNumerator="40">6.5</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Lq Ph-Ph</Comment>
 														<Name>Lq</Name>
-														<Data type="real64" unitSiNumerator="44">0.007</Data>
+														<Data type="real64" unitSiNumerator="44">0.016</Data>
 													</Parameter>
 													<Parameter>
+														<Comment LcId="1033">Max mechanical speed</Comment>
 														<Name>Nmax</Name>
 														<Data type="real64" unitSiNumerator="225">10000</Data>
 													</Parameter>
 													<Parameter>
-														<Name>R</Name>
-														<Data type="real64" unitSiNumerator="40">3.6</Data>
+														<Comment LcId="1033">J motor without brake</Comment>
+														<Name>J</Name>
+														<Data type="real64" unitSiNumerator="224">0.0000094</Data>
 													</Parameter>
 													<Parameter>
-														<Name>kErms</Name>
-														<Data type="real64" unitSiNumerator="38" unitSiDenominator="225">0.019</Data>
+														<Comment LcId="1033">Stepps per rotation </Comment>
+														<Name>SteppsPerRot</Name>
+														<Data type="real64">200</Data>
 													</Parameter>
 												</DatabaseParameters>
 												<Calc>
@@ -1300,7 +1322,7 @@
 															<Ccs>1</Ccs>
 															<Index>32784</Index>
 															<SubIndex>19</SubIndex>
-															<Data>8901</Data>
+															<Data>8203</Data>
 														</InitCmd>
 														<InitCmd>
 															<Transition>PS</Transition>
@@ -1309,7 +1331,7 @@
 															<Ccs>1</Ccs>
 															<Index>32784</Index>
 															<SubIndex>18</SubIndex>
-															<Data>1300</Data>
+															<Data>1900</Data>
 														</InitCmd>
 														<InitCmd>
 															<Transition>PS</Transition>
@@ -1318,7 +1340,7 @@
 															<Ccs>1</Ccs>
 															<Index>32784</Index>
 															<SubIndex>21</SubIndex>
-															<Data>26000000</Data>
+															<Data>2A000000</Data>
 														</InitCmd>
 														<InitCmd>
 															<Transition>PS</Transition>
@@ -1332,9 +1354,9 @@
 													</CoE>
 												</Calc>
 											</Motor>
-											<Feedback DataSource="2">
+											<Feedback>
 												<DatabaseType>
-													<OrderCode>Scanned</OrderCode>
+													<OrderCode>xxx</OrderCode>
 													<IsRotary>true</IsRotary>
 													<AbsolutePosInterface>30</AbsolutePosInterface>
 												</DatabaseType>
@@ -1392,19 +1414,85 @@
 												</Parameter>
 												<Parameter>
 													<PropertyName>MaxApplicationTorqueForce</PropertyName>
-													<Value>9.8301</Value>
+													<Value>0.8</Value>
 												</Parameter>
 												<Parameter>
 													<PropertyName>MaxApplicationSpeed</PropertyName>
-													<Value>0</Value>
+													<Value>1047.1975511966</Value>
 												</Parameter>
 											</Load>
 											<Controller>
 												<Stepper>
 													<ControlMode>1</ControlMode>
 												</Stepper>
+												<Filter Id="0">
+													<Name>ControllerFilter</Name>
+													<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+													<Parameter>
+														<PropertyName>Filter_Type</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+												</Filter>
+												<Filter Id="1">
+													<Name>ControllerFilter</Name>
+													<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+													<Parameter>
+														<PropertyName>Filter_Type</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+												</Filter>
 											</Controller>
 										</Block>
+										<WatchLog ChnId="0" UpdateIntervalInMs="500">
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="1"/>
+												<Alias>Status word</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="28688" SubIndex="3"/>
+												<Alias>Actual operation mode</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="7"/>
+												<Alias>Actual velocity</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="8"/>
+												<Alias>Actual torque</Alias>
+											</WatchLogItem>
+										</WatchLog>
 									</Channel>
 								</Inverter>
 							</TcDMDrive>
@@ -1426,11 +1514,10 @@
 							<MBoxUserCmdData>004003000a0000001f000000000000000000000000000000000000000000000020f31005020000000100456e61626c6520446961674d65737361676520617320656d657267656e637900</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c0000003000000000000000000000000000000000000000000000002000f81004000000c05d000044525620416d706c69666965722053657474696e6773202f204e6f6d696e616c204443206c696e6b20766f6c7461676500</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c0000002200000000000000000000000000000000000000000000002011801204000000e8030000445256204d6f746f722053657474696e6773202f2052617465642063757272656e7400</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c00000024000000000000000000000000000000000000000000000020118016040000002c010000445256204d6f746f722053657474696e6773202f20546f7271756520636f6e7374616e7400</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c0000002c000000000000000000000000000000000000000000000020118018040000001f000000445256204d6f746f722053657474696e6773202f20526f746f72206d6f6d656e74206f6620696e657274696100</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000a0000002700000000000000000000000000000000000000000000002011801902000000bc02445256204d6f746f722053657474696e6773202f2057696e64696e6720696e64756374616e636500</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c0000002700000000000000000000000000000000000000000000002011803004000000100e0000445256204d6f746f722053657474696e6773202f2057696e64696e6720726573697374616e636500</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c0000002500000000000000000000000000000000000000000000002011803104000000384a0000445256204d6f746f722053657474696e6773202f20566f6c7461676520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000002c000000000000000000000000000000000000000000000020118018040000005e000000445256204d6f746f722053657474696e6773202f20526f746f72206d6f6d656e74206f6620696e657274696100</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000027000000000000000000000000000000000000000000000020118019020000004006445256204d6f746f722053657474696e6773202f2057696e64696e6720696e64756374616e636500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c000000270000000000000000000000000000000000000000000000201180300400000064190000445256204d6f746f722053657474696e6773202f2057696e64696e6720726573697374616e636500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c000000250000000000000000000000000000000000000000000000201180310400000008cf0000445256204d6f746f722053657474696e6773202f20566f6c7461676520636f6e7374616e7400</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c0000003300000000000000000000000000000000000000000000002011803304000000c8000000445256204d6f746f722053657474696e6773202f204d6f746f722066756c6c737465707320706572207265766f6c7574696f6e00</MBoxUserCmdData>
 							<MBoxUserCmdData>0200030009000000200000000000000000000000000000000000000000000000201070030100000083445256204f757470757473202f204d6f646573206f66206f7065726174696f6e00</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000a0000002900000000000000000000000000000000000000000000002010701002000000ff7f445256204f757470757473202f20506f73697469766520746f72717565206c696d69742076616c756500</MBoxUserCmdData>
@@ -1438,9 +1525,9 @@
 							<MBoxUserCmdData>020003000900000041000000000000000000000000000000000000000000000020108057010000006444525620416d706c69666965722053657474696e6773202f20506f736974696f6e206c6f6f702076656c6f63697479206665656420666f7277617264206761696e00</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c0000003100000000000000000000000000000000000000000000002010806d040000006400000044525620416d706c69666965722053657474696e6773202f20546f72717565206665656420666f7277617264206761696e00</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c0000002d00000000000000000000000000000000000000000000002011803404000000e8030000445256204d6f746f722053657474696e6773202f20436f6e66696775726564206d6f746f722063757272656e7400</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000a0000003700000000000000000000000000000000000000000000002010801302000000890144525620416d706c69666965722053657474696e6773202f2043757272656e74206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000a0000003300000000000000000000000000000000000000000000002010801202000000130044525620416d706c69666965722053657474696e6773202f2043757272656e74206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c00000038000000000000000000000000000000000000000000000020108015040000002600000044525620416d706c69666965722053657474696e6773202f2056656c6f63697479206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000003700000000000000000000000000000000000000000000002010801302000000820344525620416d706c69666965722053657474696e6773202f2043757272656e74206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000003300000000000000000000000000000000000000000000002010801202000000190044525620416d706c69666965722053657474696e6773202f2043757272656e74206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c00000038000000000000000000000000000000000000000000000020108015040000002a00000044525620416d706c69666965722053657474696e6773202f2056656c6f63697479206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
 							<MBoxUserCmdData>020003000c00000034000000000000000000000000000000000000000000000020108014040000009600000044525620416d706c69666965722053657474696e6773202f2056656c6f63697479206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
 							<Pdo Name="FB Position" Index="#x1a00" Flags="#x0010" SyncMan="3">
 								<Entry Name="Position" BitLen="32" Index="#x6000" Sub="#x11">
@@ -2118,6 +2205,32 @@ Bit 8 - 15 : reserved]]></Comment>
 								<HardwareVersion>00</HardwareVersion>
 								<SerialNr>0</SerialNr>
 								<BIC>1P235802SBTN0008qo2o1KASI8100-0000-0010             Q1    2P492303019999</BIC>
+								<WatchLog UpdateIntervalInMs="500">
+									<WatchLogItem>
+										<WatchLogParaCoE Index="4120" SubIndex="2"/>
+										<Alias>Type</Alias>
+									</WatchLogItem>
+									<WatchLogItem>
+										<WatchLogParaCoE Index="4120" SubIndex="4"/>
+										<Alias>Serial Nr</Alias>
+									</WatchLogItem>
+									<WatchLogItem>
+										<WatchLogParaCoE Index="4322" SubIndex="1"/>
+										<Alias>BIC</Alias>
+									</WatchLogItem>
+									<WatchLogItem>
+										<WatchLogParaCoE Index="4106" SubIndex="0"/>
+										<Alias>Firmware version</Alias>
+									</WatchLogItem>
+									<WatchLogItem>
+										<WatchLogParaCoE Index="63744" SubIndex="18"/>
+										<Alias>DC link voltage</Alias>
+									</WatchLogItem>
+									<WatchLogItem>
+										<WatchLogParaCoE Index="63744" SubIndex="17"/>
+										<Alias>Amplifier temperature</Alias>
+									</WatchLogItem>
+								</WatchLog>
 								<Inverter>
 									<Device>
 										<Name>DMInverterTypeDevice</Name>
@@ -2384,8 +2497,74 @@ Bit 8 - 15 : reserved]]></Comment>
 												<Stepper>
 													<ControlMode>1</ControlMode>
 												</Stepper>
+												<Filter Id="0">
+													<Name>ControllerFilter</Name>
+													<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+													<Parameter>
+														<PropertyName>Filter_Type</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+												</Filter>
+												<Filter Id="1">
+													<Name>ControllerFilter</Name>
+													<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+													<Parameter>
+														<PropertyName>Filter_Type</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_LowPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassFrequency</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+													<Parameter>
+														<PropertyName>Filter_HighPassDamping</PropertyName>
+														<Value>0</Value>
+													</Parameter>
+												</Filter>
 											</Controller>
 										</Block>
+										<WatchLog ChnId="0" UpdateIntervalInMs="500">
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="1"/>
+												<Alias>Status word</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="28688" SubIndex="3"/>
+												<Alias>Actual operation mode</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="7"/>
+												<Alias>Actual velocity</Alias>
+											</WatchLogItem>
+											<WatchLogItem>
+												<WatchLogParaCoE Index="24592" SubIndex="8"/>
+												<Alias>Actual torque</Alias>
+											</WatchLogItem>
+										</WatchLog>
 									</Channel>
 								</Inverter>
 							</TcDMDrive>
@@ -5362,8 +5541,74 @@ Bit 8 - 15 : reserved]]></Comment>
 													<Stepper>
 														<ControlMode>1</ControlMode>
 													</Stepper>
+													<Filter Id="0">
+														<Name>ControllerFilter</Name>
+														<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+														<Parameter>
+															<PropertyName>Filter_Type</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_LowPassFrequency</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_LowPassDamping</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_HighPassFrequency</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_HighPassDamping</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+													</Filter>
+													<Filter Id="1">
+														<Name>ControllerFilter</Name>
+														<ProjectGUID>00000000-0000-0000-0000-000000000000</ProjectGUID>
+														<Parameter>
+															<PropertyName>Filter_Type</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_LowPassFrequency</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_LowPassDamping</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_HighPassFrequency</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+														<Parameter>
+															<PropertyName>Filter_HighPassDamping</PropertyName>
+															<Value>0</Value>
+														</Parameter>
+													</Filter>
 												</Controller>
 											</Block>
+											<WatchLog ChnId="0" UpdateIntervalInMs="500">
+												<WatchLogItem>
+													<WatchLogParaCoE Index="24592" SubIndex="1"/>
+													<Alias>Status word</Alias>
+												</WatchLogItem>
+												<WatchLogItem>
+													<WatchLogParaCoE Index="28688" SubIndex="3"/>
+													<Alias>Actual operation mode</Alias>
+												</WatchLogItem>
+												<WatchLogItem>
+													<WatchLogParaCoE Index="24592" SubIndex="7"/>
+													<Alias>Actual velocity</Alias>
+												</WatchLogItem>
+												<WatchLogItem>
+													<WatchLogParaCoE Index="24592" SubIndex="8"/>
+													<Alias>Actual torque</Alias>
+												</WatchLogItem>
+											</WatchLog>
 										</Channel>
 									</Inverter>
 								</TcDMDrive>
@@ -7047,26 +7292,32 @@ Bit 8 - 15 : reserved]]></Comment>
 		<OwnerA Name="TIPC^Untitled1^Untitled1 Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Box 4 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[1].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[1]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[1].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Box 5 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[2].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[2]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[2].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 5 (CU1128-B)^Box 6 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[3].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[3]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[3].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 5 (CU1128-B)^Box 7 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[4].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[4]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[4].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 6 (CU1128-C)^Box 8 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[5].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[5]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[5].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 3 (CU1128)^Term 6 (CU1128-C)^Box 9 (ASI8100-0000-0010)">
 				<Link VarA="PlcTask Inputs^MAIN.ASI_Axis[6].DriveToPlc" VarB="DMC Inputs^DMC"/>
+				<Link VarA="PlcTask Inputs^MAIN.wcState[6]" VarB="WcState^WcState"/>
 				<Link VarA="PlcTask Outputs^MAIN.ASI_Axis[6].PlcToDrive" VarB="DMC Outputs^DMC"/>
 			</OwnerB>
 		</OwnerA>

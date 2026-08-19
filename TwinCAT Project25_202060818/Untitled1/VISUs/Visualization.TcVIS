@@ -5,7 +5,7 @@
       <Data>
         <o xml:space="preserve" t="VisualObject">
           <n n="LastVisuLanguageModelEntry" />
-          <v n="UniqueIdGenerator">"51"</v>
+          <v n="UniqueIdGenerator">"72"</v>
           <o n="VisualElemList" t="VisualElemList">
             <l n="VisualElementList" t="VisualElemCollection" cet="GenericVisualElem">
               <o>
@@ -206,7 +206,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[1]"</v>
+                      <v n="Value">"MAIN.fbPower[1].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -1661,7 +1661,7 @@
                       <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                         <o>
                           <v n="Id">1186196937L</v>
-                          <v n="Value">"MAIN.bJogBack[1]"</v>
+                          <v n="Value">"MAIN.jogBackwardButton"</v>
                         </o>
                       </l>
                     </o>
@@ -1929,7 +1929,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.fbJog[1].Busy"</v>
+                      <v n="Value">"MAIN.jogLight"</v>
                     </o>
                     <o>
                       <v n="Id">2597686782L</v>
@@ -2494,7 +2494,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[2]"</v>
+                      <v n="Value">"MAIN.fbPower[2].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -2707,7 +2707,7 @@
                     </o>
                     <o>
                       <v n="Id">1649127785L</v>
-                      <v n="Value">338</v>
+                      <v n="Value">333</v>
                     </o>
                     <o>
                       <v n="Id">357335551L</v>
@@ -2727,7 +2727,7 @@
                     </o>
                     <o>
                       <v n="Id">550940142L</v>
-                      <v n="Value">363</v>
+                      <v n="Value">358</v>
                     </o>
                     <o>
                       <v n="Id">1473355128L</v>
@@ -2771,7 +2771,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[3]"</v>
+                      <v n="Value">"MAIN.fbPower[3].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -3048,7 +3048,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[4]"</v>
+                      <v n="Value">"MAIN.fbPower[4].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -3325,7 +3325,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[5]"</v>
+                      <v n="Value">"MAIN.fbPower[5].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -3602,7 +3602,7 @@
                     </o>
                     <o>
                       <v n="Id">743958181L</v>
-                      <v n="Value">"MAIN.bAxisReady[6]"</v>
+                      <v n="Value">"MAIN.fbPower[6].Status"</v>
                     </o>
                   </l>
                 </o>
@@ -3997,6 +3997,10 @@
                     <o>
                       <v n="Id">2597686782L</v>
                       <v n="Value">false</v>
+                    </o>
+                    <o>
+                      <v n="Id">397264524L</v>
+                      <v n="Value">"MAIN.nAxis"</v>
                     </o>
                   </l>
                 </o>

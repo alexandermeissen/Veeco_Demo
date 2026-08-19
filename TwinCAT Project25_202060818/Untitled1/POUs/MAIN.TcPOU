@@ -8,6 +8,8 @@ END_VAR
 VAR
 	ASI_Axis : ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.AXIS_REF;	
 	
+	wcState AT %I* : ARRAY[1..nNumMotor] OF BOOL;
+	
 	fbPower		: ARRAY [1..nNumMotor] OF Tc3_DriveMotionControl.MC_Power;
 	bEnable		: ARRAY [1..nNumMotor] OF BOOL;
 	bAxisReady	: ARRAY [1..nNumMotor] OF BOOL;
@@ -82,10 +84,14 @@ VAR
 	jogForwardButton: BOOL;
 	nAxis: INT;
 	jogBackwardButton: BOOL;
+	jogLight: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[bLamp := bButton;
+
+
+jogLight := fbJog[nAxis].Busy;
 
 IF bEnableAll THEN
 	FOR i := 1 TO nNumMotor DO
@@ -103,15 +109,15 @@ END_IF
 
 
 IF jogForwardButton THEN
-	MAIN.bJogFwd[nAxis] := TRUE;
+	bJogFwd[nAxis] := TRUE;
 ELSE
-	MAIN.bJogFwd[nAxis] := FALSE;
+	bJogFwd[nAxis] := FALSE;
 END_IF
 
 IF jogBackwardButton THEN
-	MAIN.bJogBack[nAxis] := TRUE;
+	bJogBack[nAxis] := TRUE;
 ELSE
-	MAIN.bJogBack[nAxis] := FALSE;
+	bJogBack[nAxis] := FALSE;
 END_IF
 
 
@@ -128,14 +134,53 @@ Asi_Axis[2].Status.ActVelo;
 Asi_Axis[2].Status.SetPos;
 Asi_Axis[2].Status.ActPos;
 
+ASI_Axis[3].ReadStatus();
+Asi_Axis[3].Status.SetVelo;
+Asi_Axis[3].Status.ActVelo;
+Asi_Axis[3].Status.SetPos;
+Asi_Axis[3].Status.ActPos;
 
+ASI_Axis[4].ReadStatus();
+Asi_Axis[4].Status.SetVelo;
+Asi_Axis[4].Status.ActVelo;
+Asi_Axis[4].Status.SetPos;
+Asi_Axis[4].Status.ActPos;
+
+ASI_Axis[5].ReadStatus();
+Asi_Axis[5].Status.SetVelo;
+Asi_Axis[5].Status.ActVelo;
+Asi_Axis[5].Status.SetPos;
+Asi_Axis[5].Status.ActPos;
+
+ASI_Axis[6].ReadStatus();
+Asi_Axis[6].Status.SetVelo;
+Asi_Axis[6].Status.ActVelo;
+Asi_Axis[6].Status.SetPos;
+Asi_Axis[6].Status.ActPos;
+
+// fbPower[1](
+// 	Axis:= ASI_Axis[1], 
+// 	Enable:= bEnable[1], 
+// 	Status=> bAxisReady[1], 
+// 	Busy=> , 
+// 	Active=> , 
+// 	Error=> bPowerErr, 
+// 	ErrorID=> nPowerErrId);
+// 	
+// 	fbReset[1](
+// 	Axis:= ASI_Axis[1], 
+// 	Execute:= bReset[1], 
+// 	Done=> , 
+// 	Busy=> , 
+// 	Error=> bResetErr, 
+// 	ErrorID=> nResetErr);
 
 FOR i := 1 TO nNumMotor DO
-	
+	//wcState[i] := NOT wcState[i];	
 
 fbPower[i](
 	Axis:= ASI_Axis[i], 
-	Enable:= bEnable[i], 
+	Enable:= bEnable[i] AND NOT wcState[i], 
 	Status=> bAxisReady[i], 
 	Busy=> , 
 	Active=> , 

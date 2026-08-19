@@ -4,7 +4,7 @@
     <Name>Drive Manager 2</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{f5828bae-01e9-4eb4-bd70-ee3611f05828}</ProjectGuid>
-    <TcPath>..\TwinCAT Project25_202060818\TwinCAT Project25.tsproj</TcPath>
+    <TcPath>C:\Users\AlexanderMe\source\Repos\alexandermeissen\Veeco_ASI_Demo\TwinCAT Project25_202060818\TwinCAT Project25.tsproj</TcPath>
     <AssemblyName>TwinCAT Drive Manager 2 Project1</AssemblyName>
     <RootNamespace>TwinCAT Drive Manager 2 Project1</RootNamespace>
     <SaveDriveDataAsFiles>False</SaveDriveDataAsFiles>
